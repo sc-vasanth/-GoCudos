@@ -1,0 +1,16 @@
+prog.env
+users.db
+__pycache__/
+*.pyc
+.streamlit/
+neon_glass_highlight_bg.jpg
+neon_glass_highlight_bg_v2.jpg
+ai_theme_bg_3d.jpg
+dark_glass_bg.jpg
+dark_network_bg.jpg
+glass_mesh_bg.jpg
+gradienta_bg.jpg
+pure_mesh_bg.jpg
+simple_dark_bg.jpg
+tech_bg.jpg
+start_all.bat

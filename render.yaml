@@ -1,0 +1,32 @@
+# Render Blueprint — deploys both services with one click
+services:
+  # ==========================================
+  # FastAPI Backend (AgniVeda AI / Predictions)
+  # ==========================================
+  - type: web
+    name: gocudos-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false  # You will set this manually in the Render dashboard
+      - key: PYTHON_VERSION
+        value: 3.11.0
+
+  # ==========================================
+  # Streamlit Frontend (GoCudos Dashboard)
+  # ==========================================
+  - type: web
+    name: gocudos
+    runtime: python
+    buildCommand: pip install -r requirements.txt && python init_db.py
+    startCommand: streamlit run app.py --server.port $PORT --server.address 0.0.0.0
+    envVars:
+      - key: API_URL
+        fromService:
+          name: gocudos-api
+          type: web
+          property: host
+      - key: PYTHON_VERSION
+        value: 3.11.0
